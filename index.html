@@ -28,13 +28,27 @@
   <script>
     const cells=document.querySelectorAll( .cell ),status=document.getElementById( status );
     let board=Array(9).fill(null),current= X ;
+
     const winLines=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+
     function checkWin(p){return winLines.some(l=>l.every(i=>board[i]===p));}
-    function handleClick(e){
-      const i=e.target.dataset.i;
+    function render(){cells.forEach((c,i)=>c.textContent=board[i]||  );}
+    function resetGame(){board.fill(null);current= X ;status.textContent= دور X ;render();}
+
+    cells.forEach((c,i)=>c.addEventListener( click ,()=>{
       if(board[i]||checkWin( X )||checkWin( O ))return;
-      board[i]=current;e.target.textContent=current;
+      board[i]=current;
+      render();
       if(checkWin(current)){status.textContent=`${current} فاز!`;return;}
+      if(board.every(Boolean)){status.textContent= تعادل ;return;}
+      current=current=== X ? O : X ;status.textContent=`دور ${current}`;
+    }));
+    resetGame();
+  </script>
+</body>
+</html>
+
+if(checkWin(current)){status.textContent=`${current} فاز!`;return;}
       if(board.every(Boolean)){status.textContent= تعادل ;return;}
       current=current=== X ? O : X ;status.textContent=`دور ${current}`;
     }
