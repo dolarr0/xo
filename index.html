@@ -47,14 +47,3 @@
   </script>
 </body>
 </html>
-
-if(checkWin(current)){status.textContent=`${current} فاز!`;return;}
-      if(board.every(Boolean)){status.textContent= تعادل ;return;}
-      current=current=== X ? O : X ;status.textContent=`دور ${current}`;
-    }
-    function resetGame(){board.fill(null);cells.forEach(c=>c.textContent=  );current= X ;status.textContent= دور X ;}
-    cells.forEach(c=>c.addEventListener( click ,handleClick));
-  </script>
-</body>
-</html>
-
