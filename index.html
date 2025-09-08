@@ -1,1 +1,46 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>XO</title>
+  <style>
+    body{font-family:Arial;text-align:center;background:#111;color:#fff;margin:0;padding:20px}h1{margin:10px 0}#board{display:grid;grid-template-columns:repeat(3,80px);gap:5px;justify-content:center;margin:10px auto}.cell{width:80px;height:80px;background:#222;font-size:2em;display:flex;align-items:center;justify-content:center;cursor:pointer}button{padding:8px 16px;font-size:1em;margin-top:10px}footer{margin-top:15px;font-size:.8em;opacity:.7}
+  </style>
+</head>
+<body>
+  <h1>XO</h1>
+  <div id="board">
+    <div class="cell" data-i="0"></div>
+    <div class="cell" data-i="1"></div>
+    <div class="cell" data-i="2"></div>
+    <div class="cell" data-i="3"></div>
+    <div class="cell" data-i="4"></div>
+    <div class="cell" data-i="5"></div>
+    <div class="cell" data-i="6"></div>
+    <div class="cell" data-i="7"></div>
+    <div class="cell" data-i="8"></div>
+  </div>
+  <p id="status">دور X</p>
+  <button onclick="resetGame()">إعادة</button>
+  <footer>By <a href="https://t.me/sdoqx" target="_blank">@sdoqx</a></footer>
+
+  <script>
+    const cells=document.querySelectorAll( .cell ),status=document.getElementById( status );
+    let board=Array(9).fill(null),current= X ;
+    const winLines=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+    function checkWin(p){return winLines.some(l=>l.every(i=>board[i]===p));}
+    function handleClick(e){
+      const i=e.target.dataset.i;
+      if(board[i]||checkWin( X )||checkWin( O ))return;
+      board[i]=current;e.target.textContent=current;
+      if(checkWin(current)){status.textContent=`${current} فاز!`;return;}
+      if(board.every(Boolean)){status.textContent= تعادل ;return;}
+      current=current=== X ? O : X ;status.textContent=`دور ${current}`;
+    }
+    function resetGame(){board.fill(null);cells.forEach(c=>c.textContent=  );current= X ;status.textContent= دور X ;}
+    cells.forEach(c=>c.addEventListener( click ,handleClick));
+  </script>
+</body>
+</html>
 
